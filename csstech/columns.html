@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>columns</title>
+	<style>
+		div {border-bottom:2px dashed black;padding: 0 2em 2em;margin-bottom: 3em;}
+		div > div {color: #888;}
+		h2 {color: #666;}
+		.mo {border:2px dashed #00000050;width:376px;margin:0 auto 3em;}
+		.pc {border:2px dashed #00000050;width:1300px;margin:0 auto;}
+	</style>
+</head>
+<body>
+	<div class="mo">
+		<h1>Mobile Size</h1>
+		<h2>column-count: 2</h2>
+		<div id="col">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
+		<style>
+			#col {
+				-moz-column-count: 2;
+				-webkit-column-count: 2;
+				column-count: 2;
+			}
+		</style>
+
+		<h2>column-width: 100px</h2>
+		<div id="wid">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
+		<style>
+			#wid {
+				-moz-column-width: 100px;
+				-webkit-column-width: 100px;
+				column-width: 100px;
+			}
+		</style>
+
+		<h2>columns: 12em</h2>
+		<div id="col_short">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
+		<style>
+			#col_short {
+				-moz-column-width: 12em;
+				-moz-columns: 12em;
+				-webkit-columns: 12em;
+				columns: 12em;
+			}
+		</style>
+
+		<h2>columns: 4</h2>
+		<div id="columns_4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
+		<style>
+			#columns_4{
+				-moz-column-count: 4;
+				-moz-columns: 4;
+				-webkit-columns: 4;
+				columns: 4;
+			}
+		</style>
+
+		<h2>columns: 12 8em</h2>
+		<div id="columns_12">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
+		<style>
+			#columns_12 {
+				-moz-columns: 12 8em;
+				-webkit-columns: 12 8em;
+				columns: 12 8em;
+			}
+		</style>
+	</div>
+	<div class="pc">
+		<h1>Desktop Size</h1>
+		<h2>column-count: 2</h2>
+		<div id="col">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
+		<style>
+			#col {
+				-moz-column-count: 2;
+				-webkit-column-count: 2;
+				column-count: 2;
+			}
+		</style>
+
+		<h2>column-width: 100px</h2>
+		<div id="wid">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
+		<style>
+			#wid {
+				-moz-column-width: 100px;
+				-webkit-column-width: 100px;
+				column-width: 100px;
+			}
+		</style>
+
+		<h2>columns: 12em</h2>
+		<div id="col_short">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
+		<style>
+			#col_short {
+				-moz-column-width: 12em;
+				-moz-columns: 12em;
+				-webkit-columns: 12em;
+				columns: 12em;
+			}
+		</style>
+
+		<h2>columns: 4</h2>
+		<div id="columns_4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
+		<style>
+			#columns_4{
+				-moz-column-count: 4;
+				-moz-columns: 4;
+				-webkit-columns: 4;
+				columns: 4;
+			}
+		</style>
+
+		<h2>columns: 12 8em</h2>
+		<div id="columns_12">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
+		<style>
+			#columns_12 {
+				-moz-columns: 12 8em;
+				-webkit-columns: 12 8em;
+				columns: 12 8em;
+			}
+		</style>
+	</div>
+
+</body>
+</html>

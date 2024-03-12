@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>fullplage</title>
+	<style>
+		*{padding:0;margin:0;}
+		html {height:100%;}
+		body {position: relative;overflow: hidden;height:100%;width:100%;}
+		.wrap {width:100vw;height:100vh;position:absolute;top:0;left:0;transition: top 1s;}
+		section {position: absolute;width:100%;height:100%;left:0;top:0;line-height: 100vh;text-align: center;font-size: 10em;}
+		.sec1 {background-color: #beebfd;}
+		.sec2 {background-color: #a9a0fc;top:100%;}
+		.sec3 {background-color: #d3c0d3;top:200%;}
+		.sec4 {background-color: #9ec5d4;top:300%;}
+		.sec5 {background-color: #8ad481;top:400%;}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<section class="sec1">Section 1</section>
+		<section class="sec2">Section 2</section>
+		<section class="sec3">Section 3</section>
+		<section class="sec4">Section 4</section>
+		<section class="sec5">Section 5</section>
+	</div>
+	<script>
+		const wrap = document.getElementsByClassName('wrap')[0];
+		const time = 1000;
+		let cnt = 0;
+		let wheelCheck = true;
+		window.addEventListener('mousewheel',function(e){
+			if (wheelCheck === true ){
+				wheelCheck = false;
+				if ( e.wheelDelta < 0 ) {
+					if(cnt < 4){
+						cnt++;
+					}
+				} else {
+					if(cnt > 0 ){
+						cnt--;
+					}
+				}
+				wrap.style.top = cnt * -100 + '%';
+				setTimeout(function(){
+					wheelCheck = true;
+				}, time);
+				console.log(cnt);
+			}
+		});
+	</script>
+</body>
+</html>

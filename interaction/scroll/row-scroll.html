@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>row scroll</title>
+	<style>
+		*{padding:0;margin:0;}
+		h1{position: absolute;z-index: 2;color:#fff;text-align: center;width: 100%;}
+		.viewbox {position: relative;width:100vw;height: 100vh;overflow: hidden;background-color: #000;}
+		.wrapper {position: relative;height: 100vh;left:0;transition: left 1s;}
+		section {width:100vw;height: 100vh;position: absolute;left:0;top:0;}
+		img {position: absolute;left:50%;top:50%;transform:translate(-50%, -50%)}
+	</style>
+	<script>
+		window.addEventListener('load', function(){
+			let sec = document.getElementsByTagName('section');
+			const wrap = document.getElementsByClassName('wrapper')[0];
+			// wrap.style = 'width:' + sec.length * 100 + '%';
+
+			for (let i = 0; i < sec.length; i++) {
+				sec[i].style = 'left:'+ (i*100) + '%';
+			}
+
+			let currentScroll = 0;
+			const maxScroll = 1000;
+			const secCnt = sec.length-1;
+			const scrollTime = 1000;
+			let scrollCheck = true;
+
+			window.addEventListener('wheel', function(event) {
+				if(scrollCheck === true){
+					scrollCheck = false;
+					setTimeout(function(){
+						scrollCheck = true;
+					}, scrollTime);
+
+					if (event.deltaY < 0) {
+						console.log('scrolling up');
+						if(currentScroll > 0){
+							currentScroll--;
+						}
+					} else if (event.deltaY > 0) {
+						console.log('scrolling down');
+						if(currentScroll < secCnt) {
+							currentScroll++;
+						}
+					}
+				}
+				wrap.style.left = currentScroll * -100 + '%';
+				console.log(currentScroll);
+			});
+		});
+	</script>
+</head>
+<body>
+	<h1>Horizontal scroll move - type Section</h1>
+	
+	<div class="viewbox">
+		<div class="wrapper">
+			<section class="sec1">
+				<img src="https://res.cloudinary.com/dgzqhksfz/image/upload/v1620325003/SLIDER/slider-intro_twikgj.jpg" alt="">
+			</section>
+			<section class="sec2">
+				<img src="https://res.cloudinary.com/dgzqhksfz/image/upload/v1620305117/SLIDER/slider-cotid_dca2ii.jpg" alt="">
+			</section>
+			<section class="sec3">
+				<img src="https://res.cloudinary.com/dgzqhksfz/image/upload/v1620314336/SLIDER/slider-madrid_ipwnps.jpg" alt="">
+			</section>
+			<section class="sec4">
+				<img src="https://res.cloudinary.com/dgzqhksfz/image/upload/v1620307368/SLIDER/slider-elrastro_xnp6sd.jpg" alt="">
+			</section>
+		</div>
+	</div>
+</body>
+</html>

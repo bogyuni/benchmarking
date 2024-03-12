@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>item</title>
+	<style>
+		*{padding:0;margin:0;}
+		img {vertical-align: top;}
+		.wrap {background: url(https://www.dr-maul.de/images/dr-maul-keyvisual-01-nav.jpg) no-repeat center/cover;height: 600vh;position: relative;background-attachment: fixed;overflow: hidden;}
+		section {height:100vh;position: absolute;left:50%;width: 50vw;}
+	</style>
+	<script>
+		window.addEventListener('DOMContentLoaded', function(){
+			const sec = document.getElementsByTagName('section');
+			const secLen = sec.length;
+			let winHeight = window.outerHeight;
+			for (let i = 0; i < secLen; i++) {
+				sec[i].style.top = winHeight * (i+1) + 'px';
+				
+			}
+
+			window.addEventListener('scroll', function(){
+				console.log(window.scrollY);
+				for (let i = 0; i < secLen; i++) {
+					if( window.scrollY >= winHeight * (i+1) ){
+						sec[i].style.top = window.scrollY +'px';
+					}
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<section class="sec1">
+			<img src="https://www.dr-maul.de/images/team-keyvisual-01-nav.jpg" alt="">
+		</section>
+		<section class="sec2">
+			<img src="https://www.dr-maul.de/images/praxis-keyvisual-01-nav.jpg" alt="">
+		</section>
+		<section class="sec3">
+			<img src="https://www.dr-maul.de/images/leistungen-keyvisual-01-nav.jpg" alt="">
+		</section>
+		<section class="sec4">
+			<img src="https://www.dr-maul.de/images/karriere-keyvisual-01-nav.jpg" alt="">
+		</section>
+	</div>
+</body>
+</html>

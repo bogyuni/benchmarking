@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>section-conversion</title>
+	<style>
+		*{padding:0;margin:0;}
+		body {cursor:none;}
+		.slide-wrap {width:100%;height:100vh;overflow: hidden;position: relative;}
+		section {position: absolute;left:0;top:0;width: 100%;height:100%;}
+		section > div {position: absolute;top:0;width:50%;height: 100%;overflow: hidden;transition: left 0.4s;}
+		.l-box {left:-50%;}
+		.r-box {left:-50%;}
+		section div img,
+		section div video {
+			position: absolute;left:50%;top:50%;transform:translate(-50%, -50%);
+			min-width: 100%;min-height: 80vw;
+			/* object-fit: cover; */
+		}
+		section.on .l-box {left:0;}
+		section.on .r-box {left:50%;}
+		.mouse-cusor {position:fixed;z-index: 99;color:#fff;font-size: 2em;background-color: #fff;}
+		.btn-next {color: red;}
+		.btn-prev {color: blue;}
+		.mouse-cusor>div.none {color:#666;background-color: #000;}
+	</style>
+	<script>
+		window.addEventListener('DOMContentLoaded', function(){
+			console.log('on load', window.innerWidth);
+			let secWidth = window.innerWidth;
+			let leftArea = secWidth / 2;
+
+			const cusorNext = document.getElementsByClassName('btn-next')[0];
+			const cusorPrev = document.getElementsByClassName('btn-prev')[0];
+			const secArea = document.getElementsByClassName('wrapper')[0];
+			const mouseCusor = document.getElementsByClassName('mouse-cusor')[0];
+			let secCon = [];
+			const secLen = document.getElementsByTagName('section').length;
+
+			let secCnt = 0;
+			const secMax = secLen -1;
+
+			for (let i = 0; i < secLen; i++) {
+				secCon[i] = document.getElementsByTagName('section')[i];
+			}
+
+			window.addEventListener('load', function(){
+				console.log('window load');
+				secCon[0].classList.add('on');
+			});
+
+			let btnCheck = null;
+
+			secArea.addEventListener('mousemove', function(e){
+				secWidth = window.innerWidth;
+				leftArea = secWidth / 2;
+
+				if(e.pageX > leftArea) {
+					btnCheck = 'next';
+					cusorNext.style.display = 'block';
+					cusorPrev.style.display = 'none';
+				} else {
+					btnCheck = 'prev';
+					cusorNext.style.display = 'none';
+					cusorPrev.style.display = 'block';
+				}
+
+				mouseCusor.style = 'left:'+e.pageX+'px;top:'+e.pageY+'px;';
+			});
+
+			secArea.addEventListener('click', function(){
+				if(btnCheck == 'next'){
+					console.log('next click');
+					if(secCnt < secMax){
+						secCnt++;
+						secCon[secCnt].classList.add('on');
+					}
+				}else{
+					console.log('prev click');
+					if(secCnt > 0){
+						secCon[secCnt].classList.remove('on');
+						secCnt--;
+					}
+				}
+
+				if(secCnt <= 0){
+					cusorNext.classList.remove('none');
+					cusorPrev.classList.add('none');
+				}else if(secCnt >= secMax){
+					cusorNext.classList.add('none');
+					cusorPrev.classList.remove('none');
+				}else{
+					cusorNext.classList.remove('none');
+					cusorPrev.classList.remove('none');
+				}
+
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="slide-wrap">
+			<section class="sec1">
+				<div class="l-box">
+					<video src="https://imnativ.com/wp-content/uploads/2021/03/imnativ-8-desktop-min.mp4" muted="muted" autoplay="autoplay" loop="loop"></video>
+				</div>
+				<div class="r-box">
+					<img src="https://imnativ.com/wp-content/uploads/2021/04/2-imbottiti-imnativ0100-min.jpg">
+				</div>
+			</section>
+			<section class="sec2">
+				<div class="l-box">
+					<img src="https://imnativ.com/wp-content/uploads/2021/04/1-_DSF4254-crop-min.jpg">
+				</div>
+				<div class="r-box">
+					<img src="https://imnativ.com/wp-content/uploads/2021/04/2-imbottiti-imnativ0076-min.jpg">
+				</div>
+			</section>
+			<section class="sec3">
+				<div class="l-box">
+					<img src="https://imnativ.com/wp-content/uploads/2021/04/1-_DSF4073-crop-min.jpg">
+				</div>
+				<div class="r-box">
+					<img src="https://imnativ.com/wp-content/uploads/2021/04/2-imbottiti-imnativ0067-min.jpg">
+				</div>
+			</section>
+			<section class="sec4">
+				<div class="l-box">
+					<img src="https://imnativ.com/wp-content/uploads/2021/04/1-_DSF3686-crop-min.jpg">
+				</div>
+				<div class="r-box">
+					<img src="https://imnativ.com/wp-content/uploads/2021/04/2-imbottiti-imnativ0042-1-min.jpg">
+				</div>
+			</section>
+			<section class="sec5">
+				<div class="l-box">
+					<video src="https://imnativ.com/wp-content/uploads/2022/02/v-5-Imnativ-potrait-.mp4" muted="muted" autoplay="autoplay" loop="loop"></video>
+				</div>
+				<div class="r-box">
+					<video src="https://imnativ.com/wp-content/uploads/2022/02/v-11-Imnativ-potrait.mp4" muted="muted" autoplay="autoplay" loop="loop"></video>
+				</div>
+			</section>
+		</div>
+		<div class="front-cont">
+			<div class="cont-l"></div>
+			<div class="cont-r"></div>
+		</div>
+		<div class="mouse-cusor">
+			<div class="btn-next">Next →</div>
+			<div class="btn-prev none">← Prev</div>
+		</div>
+	</div>
+</body>
+</html>

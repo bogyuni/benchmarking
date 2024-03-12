@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		*{padding:0;margin:0;box-sizing: border-box;}
+		.top {
+			position: relative;
+			height:100vh;
+			background-attachment: fixed;
+			background-repeat: no-repeat;
+			background-size: 11.9em,cover;
+			background-position: calc(50% + 2.5em) calc(50% + 1.0625em),50%;
+			background-image: url(./img/Seed_Homepage_HeroCapsule.webp),url(./img/Seed_Homepage_Hero_BG.jpg);
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			z-index: 3;
+		}
+		.title {padding-top: 20%;color: #fff;font-size: 1.625em;}
+		.bottom {position: relative;}
+		.bottom::after {content: '';display: block;height:400vh;}
+		.bg {position: fixed;left:0;top:0;padding: 56.25% 0 0 0;height: 100vh;width:100%;}
+		.bg iframe {position: absolute;left:50%;top:50%;width:100vw;height:56.25vw;min-height: 100vh;min-width: 177.77vh;transform: translate(-50%,-50%);}
+		.obj {position: fixed;left:50%;top:50%;width:600px;height:600px;z-index: 2;border-radius: 50%;transform: translate(-50%, -50%);background-color: #fff;}
+		.obj img {width: 75%;transform: translate(0.3em,0.3em);position: absolute;left:12.5%;top:12.5%;opacity:0;transition: opacity 0.2s;}
+		.obj .on {opacity: 1;}
+		.obj::after{content: "";width: 1.3em;height: 1.3em;background-color: #fff;border-radius: 50%;position: absolute;top: calc(50% - 0.65em);left: calc(50% - 0.65em);}
+		footer {background: #1c3a13;height:100vh;position: relative;z-index: 3;display: flex;justify-content: center;align-items: center;color:#fff;font-size: 4em;}
+	</style>
+</head>
+<body>
+	<div class="top">
+		<div class="title">
+			Probiotics are a science
+		</div>
+	</div>
+	<div class="bottom">
+		<div class="bg">
+			<iframe src="https://player.vimeo.com/video/698413733?h=123e4753ee&amp;speed=0&amp;muted=1&amp;autoplay=1&amp;autopause=0&amp;controls=0&amp;loop=1&amp;background=1&amp;app_id=122963" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="" title="Seed_PDS08_Homepage_Video_Microbes" data-ready="true"></iframe>
+		</div>
+		<div class="obj"></div>
+	</div>
+	<footer>
+		footer
+	</footer>
+
+<script>
+	window.addEventListener('load', function(){
+		const obj = document.querySelector('.obj');
+		const imgPages = 112;
+		let imgTags = '';
+		for (let i = 0; i < imgPages; i++) {
+			imgTags += '<img class="img-page" src="./img/anim-'+(i+1)+'.png" alt="">';
+		}
+		obj.innerHTML = imgTags;
+
+		let winHeight = window.innerHeight;
+		let winScroll = window.scrollY;
+		let maxScroll = winHeight * 3;
+		let sec2Scroll = 0;
+		let imgView = 0;
+		const sec2 = document.querySelector('.bottom');
+		const sec2Top = sec2.offsetTop;
+		let scrollDeltaY;
+
+		let beforeScroll = window.scrollY || 0;
+		let afterScroll = 0;
+		let direction = '';
+
+		window.addEventListener('scroll', function(e){
+			winScroll = window.scrollY;
+			sec2Scroll = winScroll < sec2Top ? 0 : winScroll-sec2Top;
+			if (sec2Scroll <= maxScroll) {
+				imgView = parseInt(imgPages / maxScroll * sec2Scroll);
+			}
+
+			if(winScroll > winHeight){
+				console.log(imgView,sec2Scroll,winScroll);
+
+				afterScroll = winScroll;
+				direction = afterScroll - beforeScroll >= 0 ? 'Down' : 'Up';
+				beforeScroll = afterScroll;
+
+				if (direction === 'Down'){
+					// for (let i = 0; i <= imgView; i++) {
+					// }
+					document.getElementsByClassName('img-page')[imgView].classList.add('on');
+				} else {
+					// 112 , 100
+					for (let i = imgView; i < imgPages; i++) {
+						document.getElementsByClassName('img-page')[i].classList.remove('on');
+					}
+				}
+			}
+
+
+		});
+
+	});
+</script>
+</body>
+</html>

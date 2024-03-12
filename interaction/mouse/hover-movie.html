@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>hover-mouse effect</title>
+	<style>
+		*{padding:0;margin:0;}
+		.box {position: relative;width:800px;margin:0 auto;}
+		h1{text-align: center;}
+		video {position: absolute;width: 100%;}
+		img{vertical-align: top;position: relative;width: 100%;opacity: 1;}
+		img:hover{opacity: 0;}
+	</style>
+	<script>
+		window.addEventListener('load',function(){
+			const box = document.getElementsByClassName('box')[0];
+			const vid = document.getElementsByTagName('video')[0];
+			const img = document.getElementsByClassName('img')[0];
+			box.addEventListener('mouseover', function(){
+				vid.play();
+				img.style = 'opacity:0';
+			});
+			box.addEventListener('mouseout', function(){
+				vid.pause();
+				vid.currentTime = 0;
+				img.style = 'opacity:1';
+			});
+		});
+	</script>
+</head>
+<body>
+	<h1>hover-mouse event</h1>
+	<div class="box">
+		<video preload="auto" playsinline="" muted="" loop="" poster="https://uploads-ssl.webflow.com/6013478c0ca6580652cdf81d/61dcf2b3d15147291b3a5381_UnspokenAgreement_Mayple_Branding_Featured_Horizontal)ForUnloadedVideo.jpg">
+			<source src="https://uploads-ssl.webflow.com/6013478c0ca6580652cdf81d/61dcf17cc82e3bc8b2f6251d_UnspokenAgreement_Mayple_Branding_Featured_Horizontal-transcode.mp4" type="video/mp4">
+		</video>
+		<img src="https://uploads-ssl.webflow.com/6013478c0ca6580652cdf81d/61dcf2b3d15147291b3a5381_UnspokenAgreement_Mayple_Branding_Featured_Horizontal)ForUnloadedVideo.jpg" alt="">
+	</div>
+</body>
+</html>

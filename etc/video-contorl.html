@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>video control</title>
+	<style>
+		video {
+			width: 400px;
+		}
+
+		dd {
+			margin-bottom: 2em;
+		}
+
+		article {
+			padding: 2em;
+		}
+
+		.sec1 ol {
+			overflow: hidden;
+		}
+
+		.sec1 ol>li {
+			width: 50%;
+			float: left;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>video 설정 preload 속성</h1>
+	<p>*예시 video의 poster 이미지에 <u>재생 버튼을 그려 넣는 것</u>은 좋은 아이디어이다.</p>
+	<section class="sec1">
+		<ol>
+			<li>
+				<h2>auto</h2>
+				<article>
+					<video poster="https://image.serybox.com/pc/main/mov_pc.jpg" controls preload="auto">
+						<source src="https://image.serybox.com/video/serybox_video_main.mp4" type="video/mp4">
+					</video>
+				</article>
+				<ul>
+					<li>페이지 로드시 video파일을 불러온다</li>
+					<li>video 영역 클릭시 바로 재생됨</li>
+					<li>재생정보 나타남</li>
+					<li>pip 모드 사용 가능</li>
+				</ul>
+			</li>
+			<li>
+				<h2>none</h2>
+				<article>
+					<video poster="https://image.serybox.com/pc/main/mov_pc.jpg" controls preload="none">
+						<source src="https://image.serybox.com/video/serybox_video_main.mp4" type="video/mp4">
+						<track kind="subtitles"
+							src="http://iandevlin.github.io/mdn/video-player-with-captions/subtitles/vtt/sintel-en.vtt"
+							srclang="en">
+					</video>
+				</article>
+				<ul>
+					<li>페이지 로드시 video파일을 불러오지 않는다</li>
+					<li>재생시 불러옴</li>
+					<li>video 영역 클릭시 재생되지 않음</li>
+					<li>재생버튼을 클릭해야함</li>
+					<li>재생정보 없음</li>
+					<li>pip 모드 재생 이후 가능</li>
+				</ul>
+			</li>
+		</ol>
+	</section>
+</body>
+
+</html>

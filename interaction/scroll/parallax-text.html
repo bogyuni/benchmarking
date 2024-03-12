@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmoothScroll</title>
+<style>
+	*{padding:0;margin:0;}
+	body {overflow-x: hidden;background: #1d1f1e;}
+	.wrap {position: relative;}
+	img {vertical-align: top;max-width:100%;}
+	.obj {position: absolute;}
+	.obj1 {top:70vh;width: 100%;}
+	.obj1 .tit {position: relative;left:0;bottom:0;color: #acacac;font-size: 10.4vw;width: 100%;}
+	.tit span {font-size: 1em;position: absolute;mix-blend-mode: hard-light;}
+	.tit .txt1 {left:0;}
+	.tit .txt2 {right:0;}
+	.sec2 {position: relative;height: 100vh;padding:50vh 0;background-color: #cec3b8;}
+	.sec2 img {position: absolute;left:50%;top:50%;transform: translate(-50%, -50%);}
+	.txt3 {position: absolute;left:0;top:20vh;font-size: 9.4rem;color: #675b50;width: 100%;text-align: center;}
+	.txt3 div {position: relative;overflow: hidden;}
+	.txt3 span {display: inline-block;transform: rotate(-20deg) translateY(-20vh);transform-origin: left top;opacity: 0;transition: all 1s ease;}
+	.txt3.on span {transform: rotate(0) translateY(0vh);opacity: 1;}
+</style>
+<body>
+	<div class="wrap">
+		<section>
+			<img class="main-img" src="https://images.ctfassets.net/fy4v4doi3fsv/45lZQNmiX62vPUI8rDimMu/0d49efacd1bc5d6dfc05c6e770938187/Hero_photo.jpg">
+			<img src="https://images.ctfassets.net/fy4v4doi3fsv/5pqBj0P4fll7pRhid9IcTG/b4efbb9f80ef5e7f04d67e0979b5db97/1.png">
+		</section>
+		<section class="sec2">
+			<span class="txt3">
+				<div><span>WE CREATE</span></div>
+				<div><span>SPACES FOR YOU</span></div>
+			</span>
+			<img src="https://images.ctfassets.net/fy4v4doi3fsv/22lnPuCl9fLlTiiq2yOv4w/4af60ba54e6f266a1af0aed97f080193/2-min.png">
+		</section>
+		<div class="obj obj1">
+			<h1 class="tit">
+				<span class="txt1">NANNA</span>
+				<span class="txt2">LAGERMAN</span>
+			</h1>
+		</div>
+
+	</div>
+<script>
+	function SmoothScroll(target, speed, smooth) {
+		if (target === document)
+			target = (document.scrollingElement 
+				|| document.documentElement 
+				|| document.body.parentNode 
+				|| document.body) // cross browser support for document scrolling
+		var moving = false
+		var pos = target.scrollTop
+		var frame = target === document.body 
+					&& document.documentElement 
+					? document.documentElement 
+					: target // safari is the new IE
+
+		target.addEventListener('mousewheel', scrolled, { passive: false })
+		target.addEventListener('DOMMouseScroll', scrolled, { passive: false })
+
+		function scrolled(e) {
+			e.preventDefault(); // disable default scrolling
+
+			var delta = normalizeWheelDelta(e)
+
+			pos += -delta * speed
+			pos = Math.max(0, Math.min(pos, target.scrollHeight - frame.clientHeight)) // limit scrolling
+
+			if (!moving) update()
+		}
+
+		function normalizeWheelDelta(e){
+			if(e.detail){
+				if(e.wheelDelta)
+					return e.wheelDelta/e.detail/40 * (e.detail>0 ? 1 : -1) // Opera
+				else
+					return -e.detail/3 // Firefox
+			}else
+				return e.wheelDelta/120 // IE,Safari,Chrome
+		}
+
+		function update() {
+			moving = true
+		
+			var delta = (pos - target.scrollTop) / smooth
+		
+			target.scrollTop += delta
+		
+			if (Math.abs(delta) > 0.5)
+				requestFrame(update)
+			else
+				moving = false
+		}
+
+		var requestFrame = function() { // requestAnimationFrame cross browser
+			return (
+				window.requestAnimationFrame ||
+				window.webkitRequestAnimationFrame ||
+				window.mozRequestAnimationFrame ||
+				window.oRequestAnimationFrame ||
+				window.msRequestAnimationFrame ||
+				function(func) {
+					window.setTimeout(func, 1000 / 50);
+				}
+			);
+		}()
+	}
+
+	new SmoothScroll(document,120,12);
+
+	var winScroll = 0;
+	let obj1 = document.getElementsByClassName('obj1')[0];
+	let obj1Top = obj1.offsetTop;
+
+	const tit = document.getElementsByClassName('tit')[0];
+
+	const txt1 = document.getElementsByClassName('txt1')[0];
+	const txt2 = document.getElementsByClassName('txt2')[0];
+
+	const txt3 = document.getElementsByClassName('txt3')[0];
+	let txt3Top = window.pageYOffset + txt3.getBoundingClientRect().top;
+	const viewPort = window.innerHeight * 0.7;
+
+	window.addEventListener('scroll', function(){
+		winScroll = window.pageYOffset;
+		txt3Top = winScroll + txt3.getBoundingClientRect().top;
+
+		console.log(txt3Top, txt3.getBoundingClientRect().top);
+
+		if(winScroll < 700){
+			tit.style.fontSize = (10.4+winScroll/170)+'vw';
+			txt1.style.left = winScroll/30+'vw';
+			txt2.style = `top:${winScroll/60}vw;right:${winScroll/90}vw`;
+		}
+
+		if(winScroll > txt3Top - viewPort) {
+			txt3.classList.add('on');
+		}else {
+			txt3.classList.remove('on');
+		}
+	});
+</script>
+</body>
+</html>

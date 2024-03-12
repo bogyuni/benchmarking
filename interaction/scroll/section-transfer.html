@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>section-transfer</title>
+	<style>
+		*{padding:0;margin:0;}
+		body{overflow-x: hidden;}
+		header,footer {background-color: #777;height:200px;color:#fff;text-align: center;line-height: 200px;font-size: 4em;}
+		section {height:200vh;position: relative;}
+		.sec1::after {content: '';display: block;position: absolute;left: 0;bottom:0;background-color: #ddf;width:100%;height:50vh;}
+		.sec3::after {content: '';display: block;position: absolute;left: 0;top:0;background-color: #ddf;width:100%;height:50vh;}
+		.sec2 {background-color: #ddf;height:400vh;}
+		/* .view-box {position: absolute;border:1px solid red;width:100px;height:100px;left:50%;top:0;
+			margin:-50px 0 0 -50px;
+		} */
+		.obj {border:2px solid black;width:200px;height: 200px;border-radius: 50%;z-index: 2;transform: translate(50%, -50%);position: absolute;left:50%;top:0%;
+		white-space: nowrap;}
+		.obj.on{position: fixed;}
+		.obj img {width:100%;vertical-align: top;transform: translateY(-50%);margin-top:100px;margin-right: 100px;}
+	</style>
+	<script>
+		window.addEventListener('DOMContentLoaded', function(){
+			console.log('DOM loaded');
+			let sec2 = document.getElementsByClassName('sec2')[0]
+			let sec2Top = sec2.offsetTop;
+			let sec2Height = sec2.offsetHeight;
+			const obj = document.getElementsByClassName('obj')[0];
+
+
+			window.addEventListener('scroll', function(){
+				let viewPort = window.innerHeight/2 // 보이는 영역의 절반 : 화면의 중앙
+				let startFixed = sec2Top - viewPort // 대상 위치 - 화면 시작하고픈 위치
+				let endFixed = sec2Top + sec2Height - viewPort // 대상 위치에서 대상의 영역(height) - 화면 끝내고픈 위치
+
+				console.log(window.scrollY, (window.scrollY-sec2Top)/sec2Height*100)
+
+				if(window.scrollY > startFixed && window.scrollY <= endFixed){
+					// 스크롤 영역 내부에 있을 경우 아이템의 속성
+					obj.classList.add('on');
+					obj.style.top = '50%';
+					obj.style.transform = 'translate(-'+ (window.scrollY-sec2Top)/sec2Height*100 + 'vw, -50%)';
+				}else if (window.scrollY > endFixed){
+					// 스크롤 영역이 밑으로 벗어났을 경우 아이템의 속성
+					obj.classList.remove('on');
+					obj.style.top = '100%';
+				}else{
+					// 스크롤 영역이 위로 벗어났을 경우 아이템의 속성 - 아이템의 초기값
+					obj.classList.remove('on');
+					obj.style.top = '0%';
+				}
+
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<header>header</header>
+		<section class="sec1">
+			<img class="" src="https://cdn.shopify.com/s/files/1/0569/0556/4315/files/redefine-hp-banner_64366710-f48e-475c-b7eb-d38bfaa7068f_768x.jpg">
+		</section>
+		<section class="sec2">
+			<div class="obj">
+				<div class="box">
+					<img src="https://cdn.shopify.com/s/files/1/0569/0556/4315/files/retouch-hero_300x.png" alt="Silo Product Images">
+					<img src="https://cdn.shopify.com/s/files/1/0569/0556/4315/files/redefine-hero_300x.png" alt="">
+					<img src="https://cdn.shopify.com/s/files/1/0569/0556/4315/files/RE-MIX_SILO_V3_4_300x.png" alt="Silo Product Images">
+					<img src="https://cdn.shopify.com/s/files/1/0569/0556/4315/files/rewind-hero_a8da48f0-076d-4586-8da0-487589684745_300x.png" alt="Silo Product Images">
+					<img src="https://cdn.shopify.com/s/files/1/0569/0556/4315/files/retouch-hero_300x.png" alt="Silo Product Images">
+					<img src="https://cdn.shopify.com/s/files/1/0569/0556/4315/files/redefine-hero_300x.png" alt="">
+					<img src="https://cdn.shopify.com/s/files/1/0569/0556/4315/files/RE-MIX_SILO_V3_4_300x.png" alt="Silo Product Images">
+					<img src="https://cdn.shopify.com/s/files/1/0569/0556/4315/files/rewind-hero_a8da48f0-076d-4586-8da0-487589684745_300x.png" alt="Silo Product Images">
+				</div>
+			</div>
+		</section>
+		<section class="sec3">
+			<img class="" src="https://cdn.shopify.com/s/files/1/0569/0556/4315/files/redefine-hp-banner_64366710-f48e-475c-b7eb-d38bfaa7068f_768x.jpg">
+			<img class="" src="https://cdn.shopify.com/s/files/1/0569/0556/4315/files/redefine-hp-banner_64366710-f48e-475c-b7eb-d38bfaa7068f_768x.jpg">
+		</section>
+		<footer>footer</footer>
+	</div>
+
+	<div class="sss"></div>
+</body>
+</html>

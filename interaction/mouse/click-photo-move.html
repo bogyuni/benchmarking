@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>click-photo-move</title>
+	<style>
+		*{padding:0;margin:0;}
+		body {overflow: hidden;}
+		.box{position: relative;width:400px;height:600px;margin:100px auto;}
+		img{vertical-align: top;width:100%;position: absolute;transition: all 0.4s ease;}
+		img:nth-child(1) {transform: rotate(45deg);}
+		img:nth-child(2) {transform: rotate(20deg);}
+		img:nth-child(3) {transform: rotate(0deg);}
+		img.cur {transform: rotate(0deg)}
+		img.on {opacity: 0;transform: rotate(-10deg) translateX(-500px);}
+	</style>
+</head>
+
+<body>
+	<div class="wrap">
+		<div class="box">
+			<img src="https://static.wildsouls.gr/app/uploads/2021/02/Layer-2.jpg" alt="">
+			<img src="https://static.wildsouls.gr/app/uploads/2021/02/Layer-0.jpg" alt="">
+			<img src="https://static.wildsouls.gr/app/uploads/2021/02/Layer-1.jpg" alt="">
+		</div>
+	</div>
+<script>
+	const img = document.getElementsByTagName('img');
+	for (let i = 0; i < img.length; i++) {
+			img[i].addEventListener('click', function(){
+				if(i == 0){
+					for (let j = 0; j < img.length; j++) {
+						img[j].classList.remove('on', 'cur');
+					}
+				}else{
+					this.classList.add('on');
+					img[i-1].classList.add('cur');
+					
+				}
+			});
+	}
+</script>
+</body>
+</html>

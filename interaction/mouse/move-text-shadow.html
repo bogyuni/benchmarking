@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>mouse move</title>
+	<style>
+		*{padding: 0;margin:0;}
+		.box{border:4px dotted #000;font-size: 2em;width:500px;height:500px;margin:100px auto;line-height: 500px;text-align: center;font-weight: bold;cursor:url(move-text-shadow.png),auto;transition: text-shadow 0.1s;}
+	</style>
+	<script>
+		window.addEventListener('load', function(){
+			console.log("All resources finished loading!");
+			const box = document.getElementsByClassName('box')[0];
+			let x, y;
+			box.addEventListener('mousemove', function(e){
+				let offX = Math.round(e.offsetX / 500 * 50 - 30);
+				let offY = Math.round(e.offsetY / 500 * 50 - 30);
+				
+				x = offX < 0 ? Math.abs(offX) : offX * -1;
+				y = offY < 0 ? Math.abs(offY) : offY * -1;
+				this.style = 'text-shadow:' + x + 'px ' + y + 'px 20px rgba(0,0,0,1)';
+				console.log(x,y);
+			});
+			box.addEventListener('mouseout', function(){
+				this.style = 'text-shadow:none';
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="box">
+		<span>Mouse Move Shadow</span>
+	</div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>flickity-slider</title>
+	<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+	<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+	<style>
+		.carousel {
+			background: #EEE;
+		}
+
+		.carousel-cell {
+			width: 66%;
+			height: 200px;
+			margin-right: 10px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="main-carousel">
+		<div class="carousel-cell">
+			<img src="https://static.wildsouls.gr/app/uploads/2020/10/taxini-futikes-inesTHUMB-1-e1604319510684.jpg">
+		</div>
+		<div class="carousel-cell">
+			<img src="https://static.wildsouls.gr/app/uploads/2020/10/taxini-viologikoTHUMB-1-e1604319684773.jpg">
+		</div>
+		<div class="carousel-cell">
+			<img src="https://static.wildsouls.gr/app/uploads/2020/10/taxini-meli-2-e1604319592209.jpg">
+		</div>
+		<div class="carousel-cell">
+			<img src="https://static.wildsouls.gr/app/uploads/2020/10/fistikovouturoTHUMB-1.jpg">
+		</div>
+		<div class="carousel-cell">
+			<img src="https://static.wildsouls.gr/app/uploads/2020/10/taxinithumb-1.jpg">
+		</div>
+		<div class="carousel-cell">
+			<img src="https://static.wildsouls.gr/app/uploads/2020/10/kasiousTHUMB-1.jpg">
+		</div>
+	</div>
+
+	<script>
+		var flkty = new Flickity('.main-carousel', {
+			// options
+			autoPlay: 3500,
+			freeScroll: true,
+			freeScrollFriction: 0.03,
+			contain: true,
+			prevNextButtons: false,
+			pageDots: false,
+			wrapAround: !0,
+			groupCells: '100%',
+			lazyLoad: 2,
+			selectedAttraction: 0.01,
+			friction: 0.15
+		});
+	</script>
+</body>
+
+</html>

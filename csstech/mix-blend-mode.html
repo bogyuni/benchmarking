@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>mix-blend-mode</title>
+	<style>
+		*{padding:0;margin:0;}
+		body{text-align: center;padding:2em;}
+		.box{width:600px;height:400px;margin:0 auto;background-color: #fff;position: relative;margin-bottom: 2em;}
+		img {width: 100%;height:100%;vertical-align: top;position: absolute;left:0;top:0;}
+		.box1 {text-align: left;}
+		.box1 h1 {word-wrap: break-word;position: absolute;left:-150px;top:60px;width:400px;font-size:3.4em;color: rgba(255, 255, 255, 0);-webkit-text-stroke: 1px white;}
+		.box1 h1 span {position: absolute;left:0;top:0;-webkit-text-stroke: 0px white;clip-path: polygon(0px 0px, 150px 0px, 150px 100%, 0% 100%);color: #383b42;}
+		.box2 h1{color:green;mix-blend-mode:multiply;font-size: 5em;position: relative;}
+		.box2 h2{color:red;mix-blend-mode:normal;font-size: 5em;position: relative;}
+		.box2 h3{color:red;mix-blend-mode:multiply;font-size: 5em;position: relative;opacity: 0.35;}
+		.memo{position: absolute;left:50%;top:0;width: 50%;height: 100%;background-color: #fff;mix-blend-mode: difference;}
+	</style>
+</head>
+<body>
+	<div class="box box1">
+		<img src="https://thefigo.com/wp-content/uploads/2020/09/TS-2-1.jpg" alt="">
+		<h1>
+			<span>The season in boutique hospitality has arrived.</span>
+			The season in boutique hospitality has arrived.
+		</h1>
+	</div>
+	<a href="https://developer.mozilla.org/ko/docs/Web/CSS/mix-blend-mode">MDN 예제</a>
+	<div class="box box2">
+		<img src="https://www.apple.com/v/iphone-13-pro/d/images/overview/camera/photographic-styles/photographic_styles_1__e2fb2nq24fiq_large.jpg">
+		<h1>Welcome!</h1>
+		<h2>Welcome!</h2>
+		<h3>Welcome!</h3>
+		<div class="memo"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>row scroll</title>
+	<style>
+		*{padding:0;margin:0;}
+		h1{position: absolute;z-index: 2;color:#fff;text-align: center;width: 100%;}
+		.viewbox {position: relative;width:100vw;height: 100vh;overflow: hidden;background-color: #000;}
+		.wrapper {position: relative;height: 100vh;left:0;transition: left 0.8s ease-out;}
+		section {width:100vw;height: 100vh;position: absolute;left:0;top:0;}
+		.img-box {border:1px solid #fff;position: absolute;left:50%;top:50%;width:300px;height:523px;transform:translate(-50%, -50%);overflow: hidden;}
+		img {vertical-align: top;position: relative;left:0;transition:left 0.4s ease;}
+		.scrollbar {position: absolute;left:0;bottom:0;width:100%;height:10px;background-color: #666;z-index: 2;}
+		.scroll-range {position: absolute;left:0;top:0;height:10px;background-color: #ff0;transition: width 0.4s ease;}
+	</style>
+	<script>
+		window.addEventListener('load', function(){
+			const sec = document.getElementsByTagName('section');
+			const wrap = document.getElementsByClassName('wrapper')[0];
+			const scrollBar = document.getElementsByClassName('scroll-range')[0];
+			const img = document.getElementsByTagName('img');
+			// wrap.style = 'width:' + sec.length * 100 + '%';
+
+			for (let i = 0; i < sec.length; i++) {
+				sec[i].style = 'left:'+ (i*100) + '%';
+			}
+
+			const secCnt = sec.length-1;
+			const scrollTime = 1000;
+			const moveRange = 10;
+			let currentScroll = 0;
+			let scrollbarWidth = 0;
+
+			window.addEventListener('wheel', function(e) {
+				if (e.deltaY < 0|| e.deltaX < 0) {
+					// console.log('scrolling left');
+					if(currentScroll > 0){
+						currentScroll = currentScroll - moveRange;
+					}
+				} else if (e.deltaY > 0 || e.deltaX > 0) {
+					// console.log('scrolling right');
+					if(currentScroll < secCnt * 100){
+						currentScroll = currentScroll + moveRange;
+					}
+				}
+
+				scrollbarWidth = currentScroll / (secCnt * 100) * 100;
+
+				for (let i = 0; i < sec.length; i++) {
+					img[i].style.left = '-'+ ((scrollbarWidth - i * 25) * 3) + '%';
+				}
+
+				wrap.style.left = '-' + currentScroll + '%';
+				scrollBar.style.width = scrollbarWidth + '%'
+				console.log(currentScroll, scrollbarWidth, secCnt);
+			});
+		});
+	</script>
+</head>
+<body>
+	<h1>Horizontal scroll move - type Scroll</h1>
+	
+	<div class="viewbox">
+		<div class="wrapper">
+			<section class="sec1">
+				<div class="img-box">
+					<img src="https://res.cloudinary.com/dgzqhksfz/image/upload/v1620325003/SLIDER/slider-intro_twikgj.jpg" alt="">
+				</div>
+			</section>
+			<section class="sec2">
+				<div class="img-box">
+					<img src="https://res.cloudinary.com/dgzqhksfz/image/upload/v1620305117/SLIDER/slider-cotid_dca2ii.jpg" alt="">
+				</div>
+			</section>
+			<section class="sec3">
+				<div class="img-box">
+					<img src="https://res.cloudinary.com/dgzqhksfz/image/upload/v1620314336/SLIDER/slider-madrid_ipwnps.jpg" alt="">
+				</div>
+			</section>
+			<section class="sec4">
+				<div class="img-box">
+					<img src="https://res.cloudinary.com/dgzqhksfz/image/upload/v1620307368/SLIDER/slider-elrastro_xnp6sd.jpg" alt="">
+				</div>
+			</section>
+		</div>
+		<div class="scrollbar">
+			<div class="scroll-range"></div>
+		</div>
+	</div>
+</body>
+</html>

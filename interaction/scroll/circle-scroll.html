@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>circle rotate</title>
+<style>
+	*{padding:0;margin:0;}
+	img{vertical-align: top;}
+	.wapper{background: linear-gradient(to bottom, #f7455f, #f57a0c, #e6b30b);padding:4em 2em;height:400vh;overflow: hidden;position: relative;}
+	svg{
+		vertical-align: top;
+		/* border:1px solid red; */
+		border-radius: 50%;
+		transition: transform 0.4s ease-out;
+	}
+	.svg1 {width:500px;height:500px;}
+	.svg2 {width:1000px;height:1000px;}
+	.svg3 {width:1000px;height:500px;}
+
+</style>
+<script>
+
+	function SmoothScroll(target, speed, smooth) {
+	if (target === document)
+		target = (document.scrollingElement 
+			|| document.documentElement 
+			|| document.body.parentNode 
+			|| document.body) // cross browser support for document scrolling
+	var moving = false
+	var pos = target.scrollTop
+	var frame = target === document.body 
+				&& document.documentElement 
+				? document.documentElement 
+				: target // safari is the new IE
+
+	target.addEventListener('mousewheel', scrolled, { passive: false })
+	target.addEventListener('DOMMouseScroll', scrolled, { passive: false })
+
+	function scrolled(e) {
+		e.preventDefault(); // disable default scrolling
+
+		var delta = normalizeWheelDelta(e)
+
+		pos += -delta * speed
+		pos = Math.max(0, Math.min(pos, target.scrollHeight - frame.clientHeight)) // limit scrolling
+
+		if (!moving) update()
+	}
+
+	function normalizeWheelDelta(e){
+		if(e.detail){
+			if(e.wheelDelta)
+				return e.wheelDelta/e.detail/40 * (e.detail>0 ? 1 : -1) // Opera
+			else
+				return -e.detail/3 // Firefox
+		}else
+			return e.wheelDelta/120 // IE,Safari,Chrome
+	}
+
+	function update() {
+		moving = true
+    
+		var delta = (pos - target.scrollTop) / smooth
+    
+		target.scrollTop += delta
+    
+		if (Math.abs(delta) > 0.5)
+			requestFrame(update)
+		else
+			moving = false
+	}
+
+	var requestFrame = function() { // requestAnimationFrame cross browser
+		return (
+			window.requestAnimationFrame ||
+			window.webkitRequestAnimationFrame ||
+			window.mozRequestAnimationFrame ||
+			window.oRequestAnimationFrame ||
+			window.msRequestAnimationFrame ||
+			function(func) {
+				window.setTimeout(func, 1000 / 50);
+			}
+		);
+	}()
+}
+
+
+	window.addEventListener('load', function(){
+		new SmoothScroll(document,120,12);
+
+		let scrollTopY = null;
+		let circleObj = [];
+		let svgLen = document.getElementsByTagName('svg').length;
+		console.log('svgLen : '+svgLen);
+
+		for (let i = 0; i < svgLen; i++) {
+			circleObj[i] = document.getElementsByTagName('svg')[i];
+		}
+
+		window.addEventListener('scroll', function(e){
+			console.log(window.scrollY);
+			scrollTopY = window.scrollY;
+			for (let i = 0; i < svgLen; i++) {
+				if(i%2 == 0){
+					circleObj[i].style = 'transform: translate3d(0px, -'+scrollTopY/5+'px, 0px) rotate(-' + scrollTopY/10 + 'deg)';
+				}else{
+					circleObj[i].style = 'transform: translate3d(0px, -'+scrollTopY/5+'px, 0px) rotate(' + scrollTopY/10 + 'deg)';
+				}
+			}
+		});
+	});
+
+</script>
+<body>
+	<div class="wapper">
+		<svg viewBox="0 0 146 100" class="svg1">
+			<defs>
+				<path id="path1" fill="none" stroke="red"
+				d="
+				m 6, 51
+				m 0, 0
+				a 67, 67, 0, 1, 0, 134, 0
+				a 67, 67, 0, 1, 0, -134, 0
+				"></path>
+			</defs>
+			<text>
+				<textPath href="#path1">Océano Cloudex® Rundex® Balmoral Samoyedo Alaska</textPath>
+			</text>
+		</svg>
+		<svg viewBox="0 0 146 100" class="svg2">
+			<defs>
+				<path id="path2" fill="none" stroke="red"
+				d="
+				m 6, 51
+				m 0, 0
+				a 67, 67, 0, 1, 0, 134, 0
+				a 67, 67, 0, 1, 0, -134, 0
+				"></path>
+			</defs>
+			<text>
+				<textPath href="#path2">Océano Cloudex® Rundex® Balmoral Samoyedo Alaska</textPath>
+			</text>
+		</svg>
+		<svg viewBox="0 0 146 100" class="svg3">
+			<defs>
+				<path id="path3" fill="none" stroke="red"
+				d="
+				m 6, 51
+				m 0, 0
+				a 67, 67, 0, 1, 0, 134, 0
+				a 67, 67, 0, 1, 0, -134, 0
+				"></path>
+			</defs>
+			<text>
+				<textPath href="#path3">Océano Cloudex® Rundex® Balmoral Samoyedo Alaska</textPath>
+			</text>
+		</svg>
+		<svg viewBox="0 0 146 100" class="svg4">
+			<defs>
+				<path id="path4" fill="none" stroke="red"
+				d="
+				m 6, 51
+				m 0, 0
+				a 67, 67, 0, 1, 0, 134, 0
+				a 67, 67, 0, 1, 0, -134, 0
+				"></path>
+			</defs>
+			<text>
+				<textPath href="#path4">Océano Cloudex® Rundex® Balmoral Samoyedo Alaska</textPath>
+			</text>
+		</svg>
+	</div>
+</body>
+</html>

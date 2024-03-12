@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>circle rotate</title>
+<style>
+	*{padding:0;margin:0;}
+	img{vertical-align: top;}
+	.wapper{background: linear-gradient(to bottom, #f7455f, #f57a0c, #e6b30b);padding:4em 2em;height:400vh;overflow: hidden;position: relative;}
+	svg{
+		vertical-align: top;
+		/* width:1600px;height:1600px; */
+		/* transform: translate3d(0px, 0px, 0px) rotate(-14.4deg); */
+
+	}
+	.svg1 {width:300px;height:300px;}
+	.svg2 {width:500px;height:500px;transform-origin: center;}
+	.svg3 {width:600px;height:300px;}
+
+</style>
+<script>
+
+	function SmoothScroll(target, speed, smooth) {
+	if (target === document)
+		target = (document.scrollingElement 
+			|| document.documentElement 
+			|| document.body.parentNode 
+			|| document.body) // cross browser support for document scrolling
+	var moving = false
+	var pos = target.scrollTop
+	var frame = target === document.body 
+				&& document.documentElement 
+				? document.documentElement 
+				: target // safari is the new IE
+
+	target.addEventListener('mousewheel', scrolled, { passive: false })
+	target.addEventListener('DOMMouseScroll', scrolled, { passive: false })
+
+	function scrolled(e) {
+		e.preventDefault(); // disable default scrolling
+
+		var delta = normalizeWheelDelta(e)
+
+		pos += -delta * speed
+		pos = Math.max(0, Math.min(pos, target.scrollHeight - frame.clientHeight)) // limit scrolling
+
+		if (!moving) update()
+	}
+
+	function normalizeWheelDelta(e){
+		if(e.detail){
+			if(e.wheelDelta)
+				return e.wheelDelta/e.detail/40 * (e.detail>0 ? 1 : -1) // Opera
+			else
+				return -e.detail/3 // Firefox
+		}else
+			return e.wheelDelta/120 // IE,Safari,Chrome
+	}
+
+	function update() {
+		moving = true
+    
+		var delta = (pos - target.scrollTop) / smooth
+    
+		target.scrollTop += delta
+    
+		if (Math.abs(delta) > 0.5)
+			requestFrame(update)
+		else
+			moving = false
+	}
+
+	var requestFrame = function() { // requestAnimationFrame cross browser
+		return (
+			window.requestAnimationFrame ||
+			window.webkitRequestAnimationFrame ||
+			window.mozRequestAnimationFrame ||
+			window.oRequestAnimationFrame ||
+			window.msRequestAnimationFrame ||
+			function(func) {
+				window.setTimeout(func, 1000 / 50);
+			}
+		);
+	}()
+}
+
+	let scrollTopY = null;
+	let circleObj;
+
+	window.addEventListener('load', function(){
+		new SmoothScroll(document,120,12);
+
+		circleObj = document.getElementsByClassName('svg2')[0];
+	});
+
+	window.addEventListener('scroll', function(e){
+		console.log(window.scrollY);
+		scrollTopY = window.scrollY;
+		circleObj.style = 'transform: translate3d(0px, 0px, 0px) rotate(' + scrollTopY + 'deg)';
+	});
+</script>
+<body>
+	<div class="wapper">
+		<svg viewBox="0 0 336 181.75" stroke="black" fill="white" width="600">
+			<path
+				d="M 126 47
+				S 284 -55 329 43
+				s -160 124 -160 124
+				S -180 241 126 47
+				Z"/>
+		</svg>
+
+
+		<svg width="320" height="320">
+			<path stroke="black" fill="green" stroke-width="2" fill-opacity="0.5"
+				d="M 10 315
+				L 110 215
+				A 30 50 0 0 1 162 162
+				L 172 152
+				A 30 50 -45 0 1 215 110
+				L 315 10
+				">
+		</svg>
+
+		<svg viewBox="0 0 100 100" class="svg1">
+			<!-- to hide the path, it is usually wrapped in a <defs> element -->
+			<!-- <defs> -->
+				<path id="path1" fill="none" stroke="red"
+					d="M10,90 Q90,90 90,45 Q90,10 50,10 Q10,10 10,40 Q10,70 45,70 Q70,70 75,50" />
+			<!-- </defs> -->
+			<text>
+				<textPath href="#path1">
+				Quick brown fox jumps over the lazy dog.
+				</textPath>
+			</text>
+		</svg>
+		<svg viewBox="0 0 140 100" class="svg2">
+			<!-- <defs> -->
+				<path id="path2" fill="none" stroke="red"
+				d="
+				m 5, 50
+				m 0, 0
+				a 50, 50 0 1,0 134,0
+				a 50, 50 0 1,0 -134,0
+				"></path>
+			<!-- </defs> -->
+			<text>
+				<textPath href="#path2">
+					<a>Océano</a>
+					<a>Cloudex®</a> 
+					<a>Rundex®</a> 
+					<a>Balmoral</a> 
+					<a>Samoyedo</a> 
+					<a>Alaska</a> 
+				</textPath>
+			</text>
+		</svg>
+		<svg viewBox="0 0 300 300" class="svg3">
+				<path id="path3" stroke="red" d="M 0 20 L 450 20"/>
+			<text>
+				<textPath href="#path3">Océano Cloudex® Rundex® Balmoral Samoyedo Alaska</textPath>
+			</text>
+		</svg>
+	</div>
+</body>
+</html>

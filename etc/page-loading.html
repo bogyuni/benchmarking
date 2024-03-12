@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>item</title>
+	<style>
+		*{padding:0;margin:0;}
+		img {vertical-align: top;}
+		.wrap {background: url(https://www.dr-maul.de/images/dr-maul-keyvisual-01-nav.jpg) no-repeat center/cover;height: 600vh;position: relative;background-attachment: fixed;overflow: hidden;}
+		section {height:100vh;position: absolute;left:50%;width: 50vw;}
+	</style>
+	<script>
+		let time = window.performance.timing;
+		let pageloadtime = time.loadEventStart - time.navigationStart;
+		var currentTime = new Date().getTime();
+		// console.log(currentTime + pageloadtime);
+
+		// const perfData = window.performance.timing;
+		// const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+		// var currentTime = new Date().getTime();
+		// console.log(perfData.loadEventEnd, currentTime- perfData.navigationStart);
+
+		function onLoad() {
+			var now = new Date().getTime();
+			var page_load_time = now - performance.timing.navigationStart;
+
+			console.log(page_load_time);
+		}
+
+		var setTime = setInterval(function(){
+			onLoad();
+		}, 100);
+
+		window.addEventListener('load', function(){
+			console.log(currentTime + pageloadtime);
+			// console.log(window.performance);
+
+			clearInterval(setTime);
+			// onLoad();
+			// console.log(perfData.loadEventEnd, currentTime- perfData.navigationStart);
+		});
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<section class="sec1">
+			<img src="https://www.dr-maul.de/images/team-keyvisual-01-nav.jpg" alt="">
+		</section>
+		<section class="sec2">
+			<img src="https://www.dr-maul.de/images/praxis-keyvisual-01-nav.jpg" alt="">
+		</section>
+		<section class="sec3">
+			<img src="https://www.dr-maul.de/images/leistungen-keyvisual-01-nav.jpg" alt="">
+		</section>
+		<section class="sec4">
+			<img src="https://www.dr-maul.de/images/karriere-keyvisual-01-nav.jpg" alt="">
+		</section>
+	</div>
+</body>
+</html>
